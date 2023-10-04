@@ -1,1 +1,24 @@
-In the following SQL query, I am extracting statistical information from a database that comprises multiple interconnected tables, focusing on customer and order data.
+In the following SQL queries, I am extracting information from a large SQLite database that contains multiple tables of customer and sales data. 
+
+# How many orders were placed in January?
+
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE length(orderID) = 6;
+
+
+# How many of those orders were for an iPhone?
+
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE length(orderID) = 6
+AND Product = "iPhone";
+
+
+# Select the customer account numbers for all the orders that were placed in February.
+
+SELECT distinct customers.acctnum
+FROM BIT_DB.customers
+INNER JOIN BIT_DB.FebSales
+ON FebSales.orderID = customers.order_id
+WHERE length(orderID) = 6;
